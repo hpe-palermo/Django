@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'admin/css/login_cadastro.css' %}">
+    <link rel="icon" href="{% static 'admin/img/ideogram.png' %}">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="container d-flex align-items-center justify-content-center" style="height: 100vh;">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+
+            <form class="rounded-3 bg-dark p-3 text-light" action="{% url 'login' %}" method="post" id="contactForm"
+                data-sb-form-api-token="API_TOKEN">
+                {% csrf_token %}
+
+                <h1 class="pb-3 text-center">Faça seu login</h1>
+
+                <div class="form-floating mb-3">
+                    <input class="form-control" name="username" id="username" type="text" placeholder="Username"
+                        data-sb-validations="required" />
+                    <label for="username" class="text-dark">Email ou nome de usuário</label>
+                    <div class="invalid-feedback" data-sb-feedback="username:required">Username is required.</div>
+                </div>
+
+                
+                <div class="form-floating mb-3">
+                    <input class="form-control" name="password" id="username" type="password" placeholder="Username"
+                        data-sb-validations="required" />
+                    <label for="username" class="text-dark">Senha</label>
+                    <div class="invalid-feedback" data-sb-feedback="username:required">Password is required.</div>
+                </div>
+                <span class="text-danger">{{ erro }}</span>
+                <div class="text-center my-3">
+                    <button type="submit" class="btn btn-primary">Entrar</button>
+                </div>
+                <div class="text-center">
+                    <a href="/cadastro/">Não possui uma conta? Cadastra-se !!!</a>
+                </div>
+                <div class="text-center">
+                    <a href="/recuperarConta/">Esqueceu sua senha? Recuperar !!!</a>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- RODAPÉ -->
+    <footer class="fixed-bottom bg-dark text-center text-light p-2">
+        Planning Tasks &copy2023 <i class="bi bi-github"></i>
+    </footer>
+
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+</body>
+
+</html>

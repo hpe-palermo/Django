@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'admin/css/login_cadastro.css' %}">
+    <link rel="icon" href="{% static 'admin/img/ideogram.png' %}">
+    <title>Inserir Código</title>
+</head>
+
+<body>
+    <div class="container d-flex align-items-center justify-content-center" style="height: 100vh;">
+        <div class="col-xs-12 col-sm-12 col-md-4">
+            <form id="post-form" class="rounded-3 bg-dark p-3 text-light" action="/voltarAoLogin/" method="post">
+                {% csrf_token %}
+                <h1 class="pb-3 text-center">Alterar senha</h1>
+                <div class="form-floating mb-3">
+                    <input class="form-control" name="username" id="username" type="text" placeholder="Username"
+                        data-sb-validations="required" readonly value="{{ user.username }}" />
+                    <label for="username" class="text-dark">Nome de usuário encontrado</label>
+                    <div class="invalid-feedback" data-sb-feedback="username:required">Username is required.</div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input class="form-control" name="email" id="emailAddress" type="email" placeholder="Email Address"
+                        data-sb-validations="required,email" readonly value="{{ user.email }}"/>
+                    <label for="emailAddress" class="text-dark">Email inserido</label>
+                    <div class="invalid-feedback" data-sb-feedback="emailAddress:required">Email Address is required.
+                    </div>
+                    <div class="invalid-feedback" data-sb-feedback="emailAddress:email">Email Address Email is not
+                        valid.</div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input class="form-control" name="password" id="username" type="password" placeholder="Username"
+                        data-sb-validations="required" />
+                    <label for="username" class="text-dark">Senha</label>
+                    <div class="invalid-feedback" data-sb-feedback="username:required">Password is required.</div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" name="confirmPassword" id="confirmaSenha" type="password" placeholder="Username"
+                        data-sb-validations="required" />
+                    <label for="username" class="text-dark">Confirmar senha</label>
+                    <div class="invalid-feedback" data-sb-feedback="username:required">Password is required.</div>
+                </div>
+
+                <div class="text-center my-3">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+                <span class="text-danger">{{ erro }}</span>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

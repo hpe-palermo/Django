@@ -1,0 +1,92 @@
+{% extends 'corpo/base.html' %}
+{% load static %}
+
+
+{% block conteudoPagina %}
+<div class="bg-dark text-light p-2 rounded-2">
+    <h1 class="text-center">Fórum</h1>
+    <div class="m-3 bg-light text-dark rounded-2">
+        <div id="lista-mensagens" style="height: 300px; overflow-y: auto;">
+            {% if mensagensForum %}
+            {% for mf in mensagensForum %}
+            <div class="border border-bottom p-2 text-start d-flex">
+                <img src="/media/{{mf.imagemPerfil}}" alt="IMG" width="50px" height="50px" class="rounded-circle me-2">
+                <div>
+                    <b>{{mf.remetente}}</b>
+                    <p>{{mf.descricao}}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="text-dark d-flex align-items-center justify-content-center h-100">
+                <h4>Não há mensagens!</h4>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <form action="{% url 'enviarMensagem' %}" class="d-flex" method="post" id="enviar-mensagem">
+            {% csrf_token %}
+            <input class="form-control me-2" id="mensagemForum" name="mensagemForum" placeholder="Escreva sua mensagem">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+</div>
+
+{% endblock conteudoPagina %}
+
+{% block codigosJS %}
+<script>
+    $(document).ready(function () {
+        setInterval(
+            function () {
+                $.ajax({
+                    type: 'GET',
+                    url: "{% url 'getMensagens' %}",
+
+                    success: function (response) {
+                        console.log("sucessful response")
+                        $("#lista-mensagens").empty();
+                        for (var key in response.mensagensForum) {
+                            let remetente = response.mensagensForum[key].remetente;
+                            let mensagem = response.mensagensForum[key].descricao;
+                            let linkIMG = response.mensagensForum[key].imagemPerfil
+                            var temp = `
+                            <div class="border border-bottom p-2 text-start d-flex">
+                                <img src="/media/${linkIMG}" alt="IMG" width="50px" height="50px"
+                                    class="rounded-circle me-2">
+                                <div>
+                                    <b>${remetente}</b>
+                                    <p>${mensagem}</p>
+                                </div>
+                            </div>`;
+                            $("#lista-mensagens").append(temp);
+                        }
+                    }, error: function (response) {
+                        console.log("GET: An Error Occured")
+                    }
+                })
+            }
+            , 1000)
+    });
+
+
+    $(document).on('submit', '#enviar-mensagem', function (e) {
+
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'enviarMensagem' %}",
+            data: {
+                mensagemForum: $("#mensagemForum").val(),
+                csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+            },
+            success: function (response) { },
+            error: function (response) {
+                console.log("POST: An Error Occured")
+            }
+        });
+    });
+</script>
+{% endblock codigosJS %}

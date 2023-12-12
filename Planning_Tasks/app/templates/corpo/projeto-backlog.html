@@ -1,0 +1,37 @@
+{% extends 'corpo/base.html' %}
+{% load static %}
+
+
+{% block conteudoPagina %}
+<h1 class="text-light">{{ projeto.nome }}</h1>
+
+<div id="container-menu-projetos" class="mt-4" style="min-width: 500px; overflow-x: auto;">
+    
+    <div class="d-flex mx-2">
+        <a href="{% url 'projetoBacklog' turma.id projeto.id %}" class="nav-link">
+            <div id="selecionado" class="col p-1 px-4 me-1 text-light fs-3">
+                Backlog
+            </div>
+        </a>
+        <a href="{% url 'projetoSprints' turma.id projeto.id %}" class="nav-link">
+            <div id="menu-projetos" class="col p-1 px-4 me-1 text-light fs-3">
+                Sprints
+            </div>
+        </a>
+        <a href="{% url 'projetoAlunos' turma.id projeto.id %}" class="nav-link">
+            <div id="menu-projetos" class="col p-1 px-4 me-1 text-light fs-3">
+                Alunos
+            </div>
+        </a>
+        <a href="{% url 'projetoAnotacoes' turma.id projeto.id %}" class="nav-link me-5">
+            <div id="menu-projetos" class="col p-1 px-4 me-5 text-light fs-3">
+                Anotações
+            </div>
+        </a>
+    </div>
+</div>
+
+{% if turma.criador == usuario.user.username %}
+    <a href="#" data-bs-toggle="modal" data-bs-target="#criar-trarefa" class="btn btn-success mt-4">Criar tarefa</a>
+{% endif %}
+{% endblock conteudoPagina %}

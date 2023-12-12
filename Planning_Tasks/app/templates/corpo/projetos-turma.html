@@ -1,0 +1,154 @@
+{% extends 'corpo/base.html' %}
+{% load static %}
+
+
+{% block conteudoPagina %}
+<h1 class="text-light">{{ turma.nome }}</h1>
+<div id="container-menu-projetos" class="mt-4 d-flex">
+    <div id="selecionado" class="p-1 px-4 me-1 text-light fs-3">
+        Projetos
+    </div>
+</div>
+
+<div class="text-light">
+    {% if turma.criador == usuario.user.username %}
+    <a href="#" data-bs-toggle="modal" data-bs-target="#criar-projeto" class="btn btn-success mt-4">Criar projeto</a>
+    {% endif %}
+
+    {% for p in projetos %}
+    <div class="d-flex justify-content-between bg-dark mt-3 rounded-1">
+        <div class="p-3 fs-5 rounded-1" style="border-left: 3px solid #f2f2f2;">
+            <a href="{% url 'projetoBacklog' turma.id p.id %}" class="nav-link">{{ p.nome }}</a>
+        </div>
+        {% if usuario.user.username == turma.criador %}
+        <div class="dropdown d-flex align-items-center me-3">
+            <button class="btn btn-transparent text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="bi bi-three-dots fs-4"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                    data-bs-target="#editar-projeto-{{p.id}}">Editar</a>
+                <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                    data-bs-target="#excluir-turma-{{p.id}}">Excluir</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="modal fade" id="editar-projeto-{{p.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel">Editar projeto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-dark">
+                    <form action="{% url 'editarProjeto' turma.id p.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Nome do projeto</label>
+                            <input type="text" class="form-control" name="nomeEditado{{p.id}}" id="nome"
+                                placeholder="Nome da turma" value="{{ p.nome }}">
+                        </div>
+                        <span id="alertaNomeEdiatado" class="text-success"></span>
+                        <div class="text-center mt-2">
+                            <button class="btn btn-success">
+                                Salvar alteração
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="excluir-turma-{{p.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel">Excluir projeto <b>{{ p.nome }}</b></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-dark text-center">
+                    <div>Deseja mesmo excluir a turma <b>{{ p.nome }}</b> ?</div>
+                    <div class="d-flex justify-content-center">
+                        <a class="btn btn-danger text-center mt-2"
+                            href="{% url 'excluirProjeto' turma.id p.id %}">Excluir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="modal fade" id="add-membros-{{p.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel">Adicionar membro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-dark">
+                    <form id="post-criar" action="#" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Nome do membro</label>
+                            <input type="text" class="form-control" name="nome-membro" id="nome" placeholder="Nome do membro">
+                        </div>
+                        <span id="erroNomeRepetido" class="text-danger"></span>
+                        <div class="text-center mt-2">
+                            <button class="btn btn-success">
+                                Criar projeto
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    {% endfor %}
+
+    <div class="modal fade" id="criar-projeto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel">Criar projeto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-dark">
+                    <!-- criar turma -->
+                    <form id="post-criar" action="{% url 'criarProjeto' turma.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Nome do projeto</label>
+                            <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome do projeto">
+                        </div>
+                        <span id="erroNomeRepetido" class="text-danger"></span>
+                        <div class="text-center mt-2">
+                            <button class="btn btn-success">
+                                Criar projeto
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+</div>
+{% endblock conteudoPagina %}

@@ -1,0 +1,75 @@
+{% extends 'corpo/base.html' %}
+{% load static %}
+
+
+{% block conteudoPagina %}
+<h1 class="text-light">{{ projeto.nome }}</h1>
+<div id="container-menu-projetos" class="mt-4" style="min-width: 500px; overflow-x: auto;">
+    <div class="d-flex mx-2">
+        <a href="{% url 'projetoBacklog' turma.id projeto.id %}" class="nav-link">
+            <div id="menu-projetos" class="col p-1 px-4 me-1 text-light fs-3">
+                Backlog
+            </div>
+        </a>
+        <a href="{% url 'projetoSprints' turma.id projeto.id %}" class="nav-link">
+            <div id="menu-projetos" class="col p-1 px-4 me-1 text-light fs-3">
+                Sprints
+            </div>
+        </a>
+        <a href="#" class="nav-link">
+            <div id="selecionado" class="col p-1 px-4 me-1 text-light fs-3">
+                Alunos
+            </div>
+        </a>
+        <a href="{% url 'projetoAnotacoes' turma.id projeto.id %}" class="nav-link me-5">
+            <div id="menu-projetos" class="col p-1 px-4 me-5 text-light fs-3">
+                Anotações
+            </div>
+        </a>
+    </div>
+</div>
+
+<div></div>
+
+<!-- lista de alunos no projeto -->
+{% for a in alunos %}
+<div class="d-flex justify-content-between bg-dark mt-3 rounded-1">
+    <div class="p-3 fs-5 rounded-1 text-light" style="border-left: 3px solid #f2f2f2;">
+        {{ a.user.username }}
+    </div>
+    {% if usuario.user.username == turma.criador %}
+    <div class="dropdown d-flex align-items-center me-3">
+        <button class="btn btn-transparent text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="bi bi-three-dots fs-4"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#rev-membros-{{a.id}}">Remover da
+                turma</a>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="modal fade" id="rev-membros-{{a.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Criar turma</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>Deseja mesmo remover o aluno <b>{{ a.user.username }}</b> deste projeto?</div>
+                    <div class="text-center mt-2">
+                        <a href="{% url 'revMembro' turma.id projeto.id a.id %}" class="btn btn-danger">Remover</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    {% endfor %}
+
+{% endblock conteudoPagina %}

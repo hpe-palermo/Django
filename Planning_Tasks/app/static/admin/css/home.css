@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: linear-gradient(90deg, rgb(20, 56, 109), rgb(50, 50, 151), rgb(12, 95, 250));
+}
+
+
+nav{
+    /* background-color: rgb(96, 141, 209); */
+    height: 70px;
+}
+
+#img-home{
+    height: 48vw;
+    background-image: url("/static/img/home.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#linear-gradient{
+    background-image: linear-gradient(120deg, rgb(20, 56, 109), rgb(12, 95, 250));
+    height: 11rem;
+}
+
+textarea{
+    resize: none;
+}
+
+footer{
+    font-size: 20px;
+}
+
+@media (max-width: 460px) {
+    #img-home{
+        height: 60vh;
+    }
+    #titulo{
+        font-size: 30px;
+    }
+    #descricao{
+        font-size: 20px;
+    }
+    #descricao2{
+        padding: 50px 0 !important;
+    }
+    #botao {
+        width: 40%;
+    }
+    #home-item-navbar {
+        border-top: 1px solid #ccc;
+    }
+}
+
+/* @media (max-width: 660px) {
+    #img-home{
+        height: 70vh;
+    }
+    #titulo{
+        font-size: 40px;
+    }
+    #descricao{
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    #img-home{
+        height: 80vh;
+    }
+    #titulo{
+        font-size: 60px;
+    }
+    #descricao{
+        font-size: 30px;
+    }
+} */
+
+/* Animações */
+
+.fadeInLeft {
+    position: relative;
+    animation-name: fadeInLeft;
+    animation-duration: 1.5s;
+}
+
+.fadeInRight {
+    position: relative;
+    animation-name: fadeInRight;
+    animation-duration: 1.5s;
+}
+
+.zoomIn {
+    animation-name: zoomIn;
+    animation-duration: 1s;
+}
+
+/* Keyframes */
+
+@keyframes zoomIn {
+    from {scale: 0%;}
+    to {scale: 100%;}
+}
+
+@keyframes fadeInLeft {
+    from {
+        left: -500px;
+        opacity: 0%;
+    }
+    to {
+        left: 0px;
+        opacity: 100%;
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        right: -500px;
+        opacity: 0%;
+    }
+    to {
+        right: 0px;
+        opacity: 100%;
+    }
+}
+
+section .animacao{
+    transition: 1s;
+}
+
+.sec-1 .animacao{
+    opacity: 0%;
+    transform: translatey(-20vh);
+}
+
+.sec-1.animado .animacao{
+    opacity: 100%;
+    transform: translateX(0vh);
+}
+
+.sec-2 .animacao{
+    opacity: 0%;
+    transform: translateX(90vh);
+}
+
+.sec-2.animado .animacao{
+    opacity: 100%;
+    transform: translateX(0vh);
+}
+
+.sec-3 .animacao{
+    opacity: 0%;
+    transform: translateX(-90vh);
+}
+
+.sec-3.animado .animacao{
+    opacity: 100%;
+    transform: translateX(0vh);
+} 
+

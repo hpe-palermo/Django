@@ -1,0 +1,234 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'admin/css/home.css' %}">
+    <link rel="icon" href="{% static 'admin/img/ideogram.png' %}">
+    <title>Planning Tasks</title>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar sticky-top navbar-expand-lg bg-dark shadow sticky-top">
+        <div class="container">
+            <a class="navbar-brand text-primary" href="#"><strong>Planning Tasks</strong></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="bi bi-list text-light pt-1"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a id="home-item-navbar" class="nav-link bg-dark text-light active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="item-navbar" class="nav-link bg-dark text-light" href="#sobre">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="item-navbar" class="nav-link bg-dark text-light" href="#contato">Contato</a>
+                    </li>
+                </ul>
+                <a href="{% url 'login' %}" class="btn btn-primary" type="submit">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CAPA -->
+    <header id="img-home" class="container-fluid d-flex align-items-center justify-content-center pt-3">
+        <div class="row">
+            <div class="col-12">
+                <h1 id="titulo" class="text-center text-light fadeInLeft">
+                    Gerencie <span class="text-primary">seus projetos</span> com o <br>Planning Tasks
+                </h1>
+                <p id="descricao" class="lead text-center text-light fadeInRight">
+                    Ferramenta simples para o gerencimento de projetos e tarefas em equipes.
+                </p>
+                <div class="mt-5 text-center">
+                    <a id="btn" href="{% url 'login' %}" class="btn btn-primary btn-lg" type="submit">Comece já</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- DESCRIÇÃO -->
+    <div id="descricao2" class="animacao mb-0 d-flex justify-content-center align-items-center p-5" style="height: 50vh;">
+        <div>
+            <section class="sec-2">
+                <h2 class="animacao text-light text-center">
+                    Aprenda a metodologia Scrum
+                </h2>
+            </section>
+            <section class="sec-3">
+                <p class="animacao text-light text-center mt-5" style="font-size: 17px;">
+                    O Planning Tasks é uma plataforma que auxiliará você fazer um gerenciamento eficiente e prático
+                    de seus <br> projetos e tarefas apresentando recursos intuitivos que permitem que você
+                    organize suas tarefas.
+                </p>
+            </section>
+
+            <div class="text-center mt-4">
+                <a id="botao" href="#sobre" class="text-light btn btn-primary btn-lg rounded-pill" style="text-decoration: none;">
+                    Saiba mais
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- CARDS -->
+    <div id="sobre" class="container-fluid bg-dark pb-3 pt-5">
+        <h1 class="text-center text-white pt-5 pb-5">O que oferecemos?</h1>
+        <div class="row">
+
+            <section class="sec-1 col-md-4 col-sm-12 mb-3 pe-5 ps-5">
+                <div class="animacao">
+                    <div id="linear-gradient" class="card border-0">
+                        <div class="text-center py-3 pb-1">
+                            <i class="bi bi-folder text-primary p-2 rounded-circle"
+                                style="width: 70px; height: 70px; font-size: 2rem; background-color: rgb(36, 26, 168);"></i>
+                        </div>
+                        <div class="card-body text-light">
+                            <h5 class="card-title text-center">Projetos</h5>
+                            <p class="card-text text-center">Gerencie seus projetos junto a seus colegas</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sec-1 col-md-4 col-sm-12 mb-3 pe-5 ps-5">
+                <div class="animacao">
+                    <div id="linear-gradient" class="card border-0">
+                        <div class="text-center py-3 pb-1">
+                            <i class="bi bi-arrow-counterclockwise text-primary p-2 rounded-circle"
+                                style="width: 70px; height: 70px; font-size: 2rem; background-color: rgb(36, 26, 168);"></i>
+                        </div>
+                        <div class="card-body text-light">
+                            <h5 class="card-title text-center">Scrum</h5>
+                            <p class="card-text text-center">Aprenda a metodologia Scrum</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sec-1 col-md-4 col-sm-12 mb-3 pe-5 ps-5">
+                <div class="animacao">
+                    <div id="linear-gradient" class="card border-0">
+                        <div class="text-center py-3 pb-1">
+                            <i class="bi bi-people text-primary p-2 rounded-circle"
+                                style="width: 70px; height: 70px; font-size: 2rem; background-color: rgb(36, 26, 168);"></i>
+                        </div>
+                        <div class="card-body text-light">
+                            <h5 class="card-title text-center">Equipes</h5>
+                            <p class="card-text text-center">Convide seus colegas para seus projetos.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sec-1 col-md-4 col-sm-12 mb-3 pe-5 ps-5">
+                <div class="animacao ">
+                    <div id="linear-gradient" class="card border-0">
+                        <div class="text-center py-3 pb-1">
+                            <i class="bi bi-bar-chart text-primary p-2 rounded-circle"
+                                style="width: 70px; height: 70px; font-size: 2rem; background-color: rgb(36, 26, 168);"></i>
+                        </div>
+                        <div class="card-body text-light">
+                            <h5 class="card-title text-center">Dashboard</h5>
+                            <p class="card-text text-center">Acompanhe o seu andamento no decorrer do projeto.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sec-1 col-md-4 col-sm-12 mb-3 pe-5 ps-5">
+                <div class="animacao">
+                    <div id="linear-gradient" class="card border-0">
+                        <div class="text-center py-3 pb-1">
+                            <i class="bi bi-calendar3 text-primary p-2 rounded-circle"
+                                style="width: 70px; height: 70px; font-size: 2rem; background-color: rgb(36, 26, 168);"></i>
+                        </div>
+                        <div class="card-body text-light">
+                            <h5 class="card-title text-center">Faça anotações</h5>
+                            <p class="card-text text-center">Registre seu progresso de cada dia.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sec-1 col-md-4 col-sm-12 mb-3 pe-5 ps-5">
+                <div class="animacao">
+                    <div id="linear-gradient" class="card border-0">
+                        <div class="text-center py-3 pb-1">
+                            <i class="bi bi-chat text-primary p-2 rounded-circle"
+                                style="width: 70px; height: 70px; font-size: 2rem; background-color: rgb(36, 26, 168);"></i>
+                        </div>
+                        <div class="card-body text-light">
+                            <h5 class="card-title text-center">Chat</h5>
+                            <p class="card-text text-center">
+                                Sistema de comunicação para facilitar a colaboração da equipes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- CONTATO -->
+    <div id="contato" class="row container-fluid mt-0 mb-5 py-4">
+        <div class="col-md-6 col-sm-12">
+            <h1 class="text-center text-white py-3 m-5 mb-3">Contato</h1>
+            <p class="lead text-center text-md-center mt-3 text-white">
+                Você tem dúvidas sobre o uso da plataforma ou deseja relatar algum problema encontrado?
+                Contate-nos!
+            </p>
+        </div>
+        <div class="col-md-6 col-sm-12">
+
+            <!-- ENVIAR AVALIAÇÃO DO SITE -->
+            <form action="{% url 'avaliacao' %}" method="post" class="text-white">
+                <div class="mb-3">
+                    <label for="" class="form-label">Nome</label>
+                    <input type="text" name="nomeAvaliacao" class="form-control" placeholder="Seu nome">
+                </div>
+                <div class="mb-3">
+                    <div>
+                        <label for="" class="form-label">Sua mensagem</label>
+                    </div>
+                    <div>
+                        <textarea class="w-100 form-control" name="mensagem" cols="30" rows="10"
+                            placeholder="Conte-nos o que está achando do site!"></textarea>
+                    </div>
+                </div>
+
+                <input id="avaliacao" name="avaliacao" type="hidden" value="Regular">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- RODAPÉ -->
+    <footer class="mt-4 bg-dark text-center text-light p-4">
+        Planning Tasks &copy2023 <i class="bi bi-github"></i>
+    </footer>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <script src="{% static 'admin/js/home.js' %}"></script>
+
+</body>
+
+</html>

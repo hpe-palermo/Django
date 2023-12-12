@@ -1,0 +1,52 @@
+{% extends 'corpo/base.html' %}
+{% load static %}
+
+{% block conteudoPagina %}
+<h1 class="text-light">{{ projeto.nome }}</h1>
+<div id="container-menu-projetos" class="mt-4" style="min-width: 500px; overflow-x: auto;">
+    <div class="d-flex mx-2">
+        <a href="{% url 'projetoBacklog' turma.id projeto.id %}" class="nav-link">
+            <div id="menu-projetos" class="col p-1 px-4 me-1 text-light fs-3">
+                Backlog
+            </div>
+        </a>
+        <a href="{% url 'projetoSprints' turma.id projeto.id %}" class="nav-link">
+            <div id="menu-projetos" class="col p-1 px-4 me-1 text-light fs-3">
+                Sprints
+            </div>
+        </a>
+        <a href="{% url 'projetoAlunos' turma.id projeto.id %}" class="nav-link">
+            <div id="menu-projetos" class="col p-1 px-4 me-1 text-light fs-3">
+                Alunos
+            </div>
+        </a>
+        <a href="#" class="nav-link me-5">
+            <div id="selecionado" class="col p-1 px-4 me-5 text-light fs-3">
+                Anotações
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="text-light mt-4">
+        <form action="{% url 'salvarAnotacoes' turma.id projeto.id %}" method="post">
+            {% csrf_token %}
+            <textarea class="form-control" name="anotacoes" id="anotacoes" cols="30" rows="10">
+                {% if projeto.anotacoes %}
+                {{ projeto.anotacoes }}
+                {% else %}
+                Este projeto não possui descrição
+                {% endif %}
+            </textarea>
+            <div class="text-center mt-2">
+                <button class="btn btn-success" type="submit">Enviar</button>
+            </div>
+        </form>
+</div>
+{% endblock conteudoPagina %}
+
+{% block codigosJS %}
+<script>
+    document.querySelector('textarea').value = document.querySelector('textarea').value.trim()
+</script>
+{% endblock codigosJS %}

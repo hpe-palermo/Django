@@ -1,0 +1,93 @@
+{% extends 'corpo/base.html' %}
+{% load static %}
+
+
+{% block conteudoPagina %}
+
+<h1 class="text-light">{{ nomePagina }}</h1>
+
+<div class="row">
+    <div class="col-md-3 col-sm-6 bg-dark text-light text-center rounded-1 m-2 p-1">
+        <small>Quantidade de Tarefas</small>
+        <h1>11</h1>
+    </div>
+    <div class="col-md-3 col-sm-6 bg-dark text-light text-center rounded-1 m-2 p-1">
+        <small>Quantidade de Tarefas Concluídas</small>
+        <h1>3</h1>
+    </div>
+    <div class="col-md-3 col-sm-12 bg-dark text-light text-center rounded-1 m-2 p-1">
+        <small>Quantidade de Tarefas em Andamento</small>
+        <h1>4</h1>
+    </div>
+    <div class="col-md-3 col-sm-12 bg-dark text-light text-center rounded-1 m-2 p-1">
+        <small>Quantidade de Tarefas canceladas</small>
+        <h1>4</h1>
+    </div>
+</div>
+
+<div class="d-flex mt-3" style="min-width: 430px; max-width: 900px; overflow-x: auto;">
+    <div class="text-light text-center rounded-1 me-1 p-1">
+        <div class="mt-2 bg-dark p-2 rounded-1" style="width: 300px;">
+            <canvas id="graficoPizzaStatusTarefas"></canvas>
+        </div>
+    </div>
+    <div class="text-light text-center rounded-1 me-1 p-1">
+        <div class="mt-2 bg-dark p-2 rounded-1" style="width: 580px;">
+            <canvas id="graficoBarrasPrioridadeTarefas"></canvas>
+        </div>
+    </div>
+</div>
+
+{% endblock conteudoPagina %}
+
+{% block codigosJS %}
+<script>
+    var xValues = ["Atribuída", "Concluída", "Pendente", "Em andamento"];
+    var yValues = [55, 49, 44, 15];
+    var barColors = ["rgb(15, 141, 209)", "green", "red", "orange"];
+
+    new Chart("graficoPizzaStatusTarefas", {
+        type: "pie",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Quantiidade por Status de Tarefa"
+            }
+        }
+    });
+
+    var xValues2 = ["Alta", "Média", "Baixa"];
+    var yValues2 = [20, 24, 12];
+    var barColors2 = ["red", "orange", "rgb(15, 141, 209)"];
+
+    new Chart("graficoBarrasPrioridadeTarefas", {
+        type: "bar",
+        data: {
+            labels: xValues2,
+            datasets: [{
+                backgroundColor: barColors2,
+                data: yValues2
+            }]
+        },
+        options: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: "Quantiidade por Prioridade de Tarefa"
+            }
+        }
+    });
+</script>
+{% endblock codigosJS %}
+
+
+</body>
+
+</html>

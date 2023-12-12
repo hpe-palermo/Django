@@ -1,0 +1,36 @@
+body {
+    background-image: linear-gradient(
+      160deg,
+      rgb(0, 0, 0),
+      rgb(6, 21, 43),
+      rgb(19, 65, 133),
+      rgb(12, 95, 250)
+    );
+  }
+
+#cards {
+  background-image: linear-gradient(120deg, rgb(20, 56, 109), rgb(12, 95, 250));
+}
+
+#welcome {
+  background-image: url("../img/Dashboard-Card.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-color: rgb(19, 65, 133);
+}
+
+#container-menu-projetos {
+  border-bottom: 1px solid #fff;
+}
+
+#menu-projetos {
+  cursor: default;
+  background-color: rgb(6, 32, 70);
+  border-radius: 10px 10px 0px 0px;
+}
+
+#selecionado{
+  cursor: default;
+  border-radius: 10px 10px 0px 0px;
+  background-color: rgb(19, 65, 133);
+}
