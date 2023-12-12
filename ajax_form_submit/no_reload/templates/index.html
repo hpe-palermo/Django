@@ -1,0 +1,89 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+=======
+<!-- <!DOCTYPE html>
+>>>>>>> e1e9015 (first commit)
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Submit Form</h1>
+
+    <form id="post-form" method="POST" action="create">
+        {% csrf_token %}
+        <p>Name</p><input type="text" name="name" id="name"><br>
+        <p>Email</p><input type="email" name="email" id="email"><br>
+        <p>Bio</p><input type="text" name="bio" id="bio"><br>
+        <input type="submit">
+    </form>
+
+    <h1>List Of Live Data</h1>
+    <ul id="display"></ul>
+
+    <script>
+        // GET do banco de dados
+        $(document).ready(function () {
+            setInterval(
+                function () {
+                    $.ajax({
+                        type: 'GET',
+                        url: "{% url 'getProfiles' %}",
+
+                        success: function (response) {
+
+                            $("#display").empty();
+                            for (var key in response.profiles) {
+                                var temp = "<h2><li>" + response.profiles[key].name + "</li></h2>";
+                                $("#display").append(temp);
+                            }
+                        }
+                    })
+                }
+                , 1000)
+        });
+
+
+        // POST do banco de dados
+        $(document).on('submit', '#post-form', function (e) {
+
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'create' %}",
+                data: {
+<<<<<<< HEAD
+                    name: $("#name").val(),
+=======
+                    name: $("#name").val() + "+++",
+>>>>>>> e1e9015 (first commit)
+                    email: $("#email").val(),
+                    bio: $("#bio").val(),
+                    csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+                },
+                success: function (data) {
+                    alert(data);
+                }//,
+                // error: function(response) {
+                //     alert("An Error Occured")
+                // }
+            });
+        });
+    </script>
+
+</body>
+
+<<<<<<< HEAD
+</html>
+=======
+</html> -->
+>>>>>>> e1e9015 (first commit)

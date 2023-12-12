@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Chat Room</h1>
+
+    <form id="post-form" method="POST" action="sendMsg">
+        {% csrf_token %}
+        <p>Name</p><input type="text" name="name" id="name" value="{{ new_profile.name }}"><br>
+        <p>Email</p><input type="text" name="msg" id="msg"><br>
+        <input type="submit">
+    </form>
+
+    <h1>Messages</h1>
+    <div id="display">
+        <div style="background-color: rgb(173, 173, 173); margin: 10px; padding-left: 10px; border-radius: 10px;">
+            <h3>Nome</p>
+            <p>oi</p>
+        </div>
+    </div>
+    <span id="span"></span>
+
+    <script>
+        // GET do banco de dados
+        $(document).ready(function () {
+            setInterval(
+                function () {
+                    $.ajax({
+                        type: 'GET',
+                        url: "{% url 'getMensagens' %}",
+
+                        success: function (response) {
+
+                            $("#display").empty();
+                            // console.log(response.mensagens)
+                            for (var key in response.mensagens) {
+                                var divHead = '<div style="background-color: rgb(173, 173, 173); margin: 10px; padding-left: 10px; border-radius: 10px;">'
+                                var remetente = response.mensagens[key].remetente
+                                var texto = response.mensagens[key].texto
+                                var h3 = `<h3>${remetente}</p><p>${texto}</p></div>`
+                                var div = divHead + h3;
+                                $("#display").append(div);
+                            }
+                        }
+                    });
+                    // ir para o final da página direto
+                    window.scroll({
+                        top: document.getElementById("span").offsetTop,
+                        left: 0,
+                        behavior: 'instant'
+                    })
+                }
+                , 1000)
+        });
+
+
+        // POST do banco de dados
+        $(document).on('submit', '#post-form', function (e) {
+
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'sendMensagens' %}",
+                data: {
+                    name: $("#name").val(),
+                    msg: $("#msg").val(),
+                    csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+                },
+                success: function (data) {
+                    // alert(data);
+                }//,
+                // error: function(response) {
+                //     alert("An Error Occured")
+                // }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
