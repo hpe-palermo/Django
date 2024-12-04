@@ -13,35 +13,3 @@ class Produto(models.Model):
 
     def __str__(self):
         return self.nome
-
-"""
-{
-    "id": 1,
-    "nome": "Frutas"
-},
-{
-    "id": 2,
-    "nome": "Eletrônico"
-}
-{
-    "id": 1,
-    "nome": "HeadFone",
-    "descricao": "fone.",
-    "preco": "100.00",
-    "categoria": 2
-}
-{
-    "id": 2,
-    "nome": "XBox",
-    "descricao": "Videogame",
-    "preco": "2000.00",
-    "categoria": 2
-}
-{
-    "id": 3,
-    "nome": "Pera",
-    "descricao": "Pera",
-    "preco": "2.00",
-    "categoria": 1
-}
-"""
