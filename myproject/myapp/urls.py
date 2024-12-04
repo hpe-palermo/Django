@@ -6,5 +6,6 @@ urlpatterns = [
     path('produtos/', ProdutoListCreateAPIView.as_view(), name='produto-list-create'),
     path('produtos/<int:id>/', ProdutoListCreateAPIView.as_view(), name='produto-list-one'),
     path('categorias/', CategoriaListCreateAPIView.as_view(), name='categoria-list-create'),
+    path('categorias/<int:id>/', CategoriaListCreateAPIView.as_view(), name='categoria-update-delete'),
     path('produtos/categoria/<int:id>', ProdutoCategoriaListAPIView.as_view(), name='produto-categoria-list'),
 ]
